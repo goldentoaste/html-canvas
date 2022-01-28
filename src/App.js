@@ -13,7 +13,7 @@ const print = (item) => {
 const proto = CanvasRenderingContext2D.prototype;
 const transforms = [
     new CanvasTransforms(proto.translate, [200, 200]),
-    
+
     new CanvasTransforms(proto.rotate, [Vector2.d2r(45)]),
     new CanvasTransforms(proto.scale, [0.5, 1]),
 ];
@@ -25,33 +25,41 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 const onDragEnd = (result) => {
-    print(transforms);
     if (!result.destination) {
         return;
     }
     reorder(transforms, result.source.index, result.destination.index);
-  
 };
 
 const itemStyle = (isDragging, draggableStyle) => ({
     padding: 12,
     background: '#f0f0f0',
     ...draggableStyle,
-})
+});
 
-const transformContainer = (item) =>{
-    switch(item.func){
+const transformContainer = (item) => {
+    switch (item.func) {
         case proto.translate:
             return (
                 <div>
                     <label>Translation</label>
                     <div>
                         <label>X:</label>
-                        <input type={'number'} onChange={(eve)=>{item.params[0] = parseInt(eve.target.value)}}></input>
+                        <input
+                            type={'number'}
+                            onChange={(eve) => {
+                                item.params[0] = parseInt(eve.target.value);
+                            }}
+                        ></input>
                     </div>
                     <div>
                         <label>Y:</label>
-                        <input type={'number'} onChange={(eve)=>{item.params[1] = parseInt(eve.target.value)}}></input>
+                        <input
+                            type={'number'}
+                            onChange={(eve) => {
+                                item.params[1] = parseInt(eve.target.value);
+                            }}
+                        ></input>
                     </div>
                 </div>
             );
@@ -61,7 +69,12 @@ const transformContainer = (item) =>{
                     <label>Rotation</label>
                     <div>
                         <label>Angle(degrees):</label>
-                        <input type={'number'} onChange={(eve)=>{item.params[0] = Vector2.d2r(parseInt(eve.target.value))}}></input>
+                        <input
+                            type={'number'}
+                            onChange={(eve) => {
+                                item.params[0] = Vector2.d2r(parseInt(eve.target.value));
+                            }}
+                        ></input>
                     </div>
                 </div>
             );
@@ -71,18 +84,28 @@ const transformContainer = (item) =>{
                     <label>Scale</label>
                     <div>
                         <label>X:</label>
-                        <input type={'number'} onChange={(eve)=>{item.params[0] = parseInt(eve.target.value)}}></input>
+                        <input
+                            type={'number'}
+                            onChange={(eve) => {
+                                item.params[0] = parseFloat(eve.target.value);
+                            }}
+                        ></input>
                     </div>
                     <div>
                         <label>Y:</label>
-                        <input type={'number'} onChange={(eve)=>{item.params[1] = parseInt(eve.target.value)}}></input>
+                        <input
+                            type={'number'}
+                            onChange={(eve) => {
+                                item.params[1] = parseFloat(eve.target.value);
+                            }}
+                        ></input>
                     </div>
                 </div>
             );
         default:
-            print("get fucked!")
+            print('get fucked!');
     }
-}
+};
 
 function App() {
     let listRef = useRef(objects);
@@ -103,7 +126,7 @@ function App() {
                         <div
                             {...provided.droppableProps}
                             ref={provided.innerRef}
-                            style={{ width: 200, padding: 6, background:'#40f076'}}
+                            style={{ width: 200, padding: 6, background: '#40f076' }}
                         >
                             {transforms.map((item, index) => (
                                 <Draggable key={index} draggableId={'' + index} index={index}>
