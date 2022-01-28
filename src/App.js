@@ -47,11 +47,11 @@ const transformContainer = (item) =>{
                     <label>Translation</label>
                     <div>
                         <label>X:</label>
-                        <input type={'number'}></input>
+                        <input type={'number'} onChange={(eve)=>{item.params[0] = parseInt(eve.target.value)}}></input>
                     </div>
                     <div>
                         <label>Y:</label>
-                        <input type={'number'}></input>
+                        <input type={'number'} onChange={(eve)=>{item.params[1] = parseInt(eve.target.value)}}></input>
                     </div>
                 </div>
             );
@@ -61,7 +61,7 @@ const transformContainer = (item) =>{
                     <label>Rotation</label>
                     <div>
                         <label>Angle(degrees):</label>
-                        <input type={'number'}></input>
+                        <input type={'number'} onChange={(eve)=>{item.params[0] = Vector2.d2r(parseInt(eve.target.value))}}></input>
                     </div>
                 </div>
             );
@@ -71,11 +71,11 @@ const transformContainer = (item) =>{
                     <label>Scale</label>
                     <div>
                         <label>X:</label>
-                        <input type={'number'}></input>
+                        <input type={'number'} onChange={(eve)=>{item.params[0] = parseInt(eve.target.value)}}></input>
                     </div>
                     <div>
                         <label>Y:</label>
-                        <input type={'number'}></input>
+                        <input type={'number'} onChange={(eve)=>{item.params[1] = parseInt(eve.target.value)}}></input>
                     </div>
                 </div>
             );
@@ -103,7 +103,7 @@ function App() {
                         <div
                             {...provided.droppableProps}
                             ref={provided.innerRef}
-                            style={{ width: 200, padding: 6, background: '#40f076' }}
+                            style={{ width: 200, padding: 6, background:'#40f076'}}
                         >
                             {transforms.map((item, index) => (
                                 <Draggable key={index} draggableId={'' + index} index={index}>
